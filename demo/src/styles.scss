@@ -1,0 +1,26 @@
+@import "~bootstrap/scss/bootstrap.scss";
+
+#main-content {
+  margin-top: 1rem;
+}
+
+.calculator {
+  input[type=text] {
+    text-align: center;
+  }
+
+  .result {
+    font-size: 2rem;
+  }
+
+  .form-control,
+  .btn-group {
+    + .alert {
+      margin-top: 0.5rem;
+    }
+  }
+
+  .btn-group {
+    width: 100%;
+  }
+}

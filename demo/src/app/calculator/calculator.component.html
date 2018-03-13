@@ -1,0 +1,87 @@
+<div class="container calculator">
+  <form [formGroup]="calculatorForm">
+    <div class="row">
+      <div class="col">
+        <div class="form-group number-a">
+          <label>a</label>
+          <input type="text"
+                 class="form-control"
+                 name="a"
+                 formControlName="a">
+          <div *ngIf="a.invalid && (a.touched || a.dirty)"
+               class="alert alert-danger">
+            <div *ngIf="a.errors.required">
+              <span>Enter a value.</span>
+            </div>
+            <div *ngIf="a.errors.number && !a.errors.required">
+              <span>Enter a numerical value.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group number-b">
+          <label>b</label>
+          <input type="text"
+                 class="form-control"
+                 name="b"
+                 formControlName="b">
+          <div *ngIf="b.invalid && (b.touched || b.dirty)"
+               class="alert alert-danger">
+            <div *ngIf="b.errors.required">
+              <span>Enter a value.</span>
+            </div>
+            <div *ngIf="b.errors.number && !b.errors.required">
+              <span>Enter a numerical value.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="form-group operation">
+          <label>Operation</label>
+          <div class="btn-group btn-group-toggle"
+               ngbRadioGroup
+               name="operation"
+               formControlName="operation">
+            <label *ngFor="let o of operations"
+                   ngbButtonLabel
+                   class="btn-primary">
+              <input ngbButton
+                     type="radio"
+                     [value]="o.value">
+              <span>{{o.sign}}</span>
+            </label>
+          </div>
+          <div *ngIf="operation.invalid && (operation.touched || b.dirty)"
+               class="alert alert-danger">
+            <div *ngIf="operation.errors.required">
+              <span>Select an operation.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div *ngIf="operation.value"
+         class="row">
+      <div class="col">
+        <span>a</span>
+        <span>{{getOperationSign(operation.value)}}</span>
+        <span>b</span>
+        <span>=</span>
+        <span>c</span>
+      </div>
+    </div>
+    <div *ngIf="a.valid && b.valid && operation && c !== undefined"
+         class="row result">
+      <div class="col">
+        <span>{{a.value | number}}</span>
+        <span>{{getOperationSign(operation.value)}}</span>
+        <span>{{b.value | number}}</span>
+        <span>=</span>
+        <span>{{c | number}}</span>
+      </div>
+    </div>
+  </form>
+</div>
