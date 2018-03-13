@@ -3,19 +3,24 @@ import { CalculatorComponent } from './calculator.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { element, by } from 'protractor';
 import { CalculatorService } from './calculator.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 describe('CalculatorComponent', () => {
   let component: CalculatorComponent;
   let fixture: ComponentFixture<CalculatorComponent>;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      imports: [
-        FormsModule, ReactiveFormsModule,
-        CalculatorService
-      ],
-      declarations: [CalculatorComponent]
-    })
+    TestBed
+      .configureTestingModule({
+        imports: [
+          FormsModule, ReactiveFormsModule,
+          NgbModule,
+        ],
+        providers: [
+          CalculatorService
+        ],
+        declarations: [CalculatorComponent]
+      })
       .compileComponents();
   }));
 
