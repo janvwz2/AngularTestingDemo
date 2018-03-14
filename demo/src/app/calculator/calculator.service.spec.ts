@@ -18,7 +18,7 @@ describe('CalculatorService', () => {
       const expected = 3;
       const actual = service.add(1, 2);
 
-      expect(expected).toBe(actual);
+      expect(actual).toBe(expected);
     }));
   });
 
@@ -27,7 +27,7 @@ describe('CalculatorService', () => {
       const expected = -1;
       const actual = service.subtract(1, 2);
 
-      expect(expected).toBe(actual);
+      expect(actual).toBe(expected);
     }));
   });
 
@@ -36,7 +36,7 @@ describe('CalculatorService', () => {
       const expected = Infinity;
       const actual = service.divide(3, 0);
 
-      expect(expected).toBe(actual);
+      expect(actual).toBe(expected);
     }));
   });
 });
