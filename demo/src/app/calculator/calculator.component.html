@@ -64,23 +64,16 @@
     </div>
     <hr />
     <div *ngIf="operation.value"
-         class="row">
+         class="row preview">
       <div class="col">
-        <span>a</span>
-        <span>{{getOperationSign(operation.value)}}</span>
-        <span>b</span>
-        <span>=</span>
-        <span>c</span>
+        <span>a {{getOperationSign(operation.value)}} b = c</span>
       </div>
     </div>
     <div *ngIf="a.valid && b.valid && operation && c !== undefined"
          class="row result">
       <div class="col">
-        <span>{{a.value | number}}</span>
-        <span>{{getOperationSign(operation.value)}}</span>
-        <span>{{b.value | number}}</span>
-        <span>=</span>
-        <span>{{c | number}}</span>
+        <span>
+          {{a.value | number}} {{getOperationSign(operation.value)}} {{b.value | number}} = {{c | number}}</span>
       </div>
     </div>
   </form>

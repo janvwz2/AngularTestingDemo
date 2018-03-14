@@ -41,7 +41,7 @@ describe('Calculator test suite:', () => {
           inputControl = numberFieldControl.element(by.name(name));
         });
 
-        beforeEach(() => {
+        afterEach(() => {
           // Clear the input control before every test in this describe
           inputControl.clear();
         });
@@ -78,9 +78,68 @@ describe('Calculator test suite:', () => {
 
     describe('The operation multi-select control', () => {
 
+      let operationControl: ElementFinder;
+      let numberAInputControl: ElementFinder;
+      let numberBInputControl: ElementFinder;
+
+      beforeAll(() => {
+        operationControl = calculatorElement.element(by.css('.form-group.operation'));
+        numberAInputControl = calculatorElement.element(by.name('a'));
+        numberBInputControl = calculatorElement.element(by.name('b'));
+      });
+
+      it('should show validation', () => {
+        numberAInputControl.sendKeys('1');
+        numberBInputControl.sendKeys('2');
+
+        const validationControl = operationControl.element(by.css('.alert.alert-danger'));
+
+        expect(validationControl.isDisplayed()).toBeTruthy();
+      });
+
+      it('should hide the validation error when an operation was selected', () => {
+        operationControl
+          .element(by.css('.btn-group'))
+          .all(by.tagName('label'))
+          .first()
+          .click();
+
+        const validationControls = operationControl.all(by.css('.alert.alert-danger'));
+
+        expect(validationControls.count()).toBe(0);
+      });
+
     });
 
-    // TODO Add more tests here
+    describe('The calculation', () => {
+
+      let previewLabel: ElementFinder;
+      let resultLabel: ElementFinder;
+
+      beforeAll(() => {
+        previewLabel = calculatorElement
+          .element(by.css('.row.preview'))
+          .all(by.tagName('span'))
+          .first();
+        resultLabel = calculatorElement
+          .element(by.css('.row.result'))
+          .all(by.tagName('span'))
+          .first();
+      });
+
+      describe('The preview label', () => {
+        it('should display the correct value', () => {
+          expect(previewLabel.getText()).toBe('a + b = c');
+        });
+      });
+
+      describe('The result label', () => {
+        it('should display the correct calculated value', () => {
+          expect(resultLabel.getText()).toBe('1 + 2 = 3');
+        });
+      });
+
+    });
 
   });
 
